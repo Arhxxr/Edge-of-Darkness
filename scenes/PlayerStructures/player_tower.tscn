@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://b1bl4ijxxjtb7"]
+
+[ext_resource type="Script" path="res://scripts/towers/player_tower.gd" id="1_j0vw1"]
+[ext_resource type="Texture2D" uid="uid://phocubs2ode3" path="res://assets/art/sprites/crevice.png" id="2_6alac"]
+[ext_resource type="PackedScene" uid="uid://dp3r1uggnor8q" path="res://scenes/tower_animation.tscn" id="2_42so0"]
+[ext_resource type="PackedScene" uid="uid://dkhcx7ibd31at" path="res://scenes/PlayerStructures/fire_tower.tscn" id="2_x8jyw"]
+[ext_resource type="PackedScene" uid="uid://bc07bc5xc7ykt" path="res://scenes/PlayerStructures/ice_tower.tscn" id="3_1mos4"]
+[ext_resource type="Texture2D" uid="uid://l4c1h0bxf3yx" path="res://assets/art/sprites/basic_tower.png" id="3_o6n14"]
+[ext_resource type="PackedScene" uid="uid://dnslkhdy848oj" path="res://scenes/PlayerStructures/light_tower.tscn" id="4_mgqqh"]
+[ext_resource type="PackedScene" uid="uid://bfymede5ig052" path="res://scenes/tower_weapon.tscn" id="5_bc58g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vg7sg"]
+size = Vector2(35, 15)
+
+[node name="Building" type="StaticBody2D" node_paths=PackedStringArray("activeNode", "collider") groups=["Building"]]
+collision_layer = 12
+collision_mask = 4
+script = ExtResource("1_j0vw1")
+activeNode = NodePath("ActiveNode")
+collider = NodePath("CollisionShape2D")
+max_target_distance = 240
+fire_tower = ExtResource("2_x8jyw")
+ice_tower = ExtResource("3_1mos4")
+light_tower = ExtResource("4_mgqqh")
+
+[node name="TowerPlayer" parent="." instance=ExtResource("2_42so0")]
+
+[node name="Crevice" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2.08165e-12, -23)
+texture = ExtResource("2_6alac")
+
+[node name="ActiveNode" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = -61.0
+offset_right = 32.0
+offset_bottom = 3.0
+grow_horizontal = 2
+pivot_offset = Vector2(32, 64)
+mouse_filter = 2
+
+[node name="TowerSprite" type="Sprite2D" parent="Control"]
+clip_children = 2
+position = Vector2(32, 128)
+texture = ExtResource("3_o6n14")
+offset = Vector2(2.08165e-12, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Building"]]
+visible = false
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_vg7sg")
+
+[node name="TowerWeapon" parent="." instance=ExtResource("5_bc58g")]
+reload_time = 0.5
+
+[node name="TowerUpgrade" type="Control" parent="."]
+visible = false
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_left = -107.0
+offset_top = -220.0
+offset_right = 107.0
+offset_bottom = -53.0
+
+[node name="ItemList" type="ItemList" parent="TowerUpgrade"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 136.0
+offset_right = 139.0
+offset_bottom = 230.0
+allow_search = false
+item_count = 3
+item_0/text = "Fire"
+item_1/text = "Ice"
+item_2/text = "Light"
+
+[connection signal="item_selected" from="TowerUpgrade/ItemList" to="." method="_on_item_list_item_selected"]

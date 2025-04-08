@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1t1227ww7kdc"]
+
+[ext_resource type="Script" path="res://scripts/splash_screen.gd" id="1_f48w2"]
+[ext_resource type="Script" path="res://scripts/packed_scene_list.gd" id="2_uscg3"]
+[ext_resource type="PackedScene" uid="uid://cqamxveiuaici" path="res://scenes/PlayerStructures/player_light.tscn" id="3_uuepi"]
+[ext_resource type="PackedScene" uid="uid://b1bl4ijxxjtb7" path="res://scenes/PlayerStructures/player_tower.tscn" id="4_mbuqt"]
+[ext_resource type="AudioStream" uid="uid://mifc8m427elp" path="res://assets/music/Sounds/ppsft-high.mp3" id="5_fm7ea"]
+[ext_resource type="Script" path="res://scripts/overlay.gd" id="5_hyvk4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ekb4"]
+font_size = 120
+
+[sub_resource type="LabelSettings" id="LabelSettings_orijc"]
+font_size = 42
+
+[node name="SplashScreen" type="Node2D"]
+script = ExtResource("1_f48w2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -656.0
+offset_top = -358.0
+offset_right = 730.0
+offset_bottom = 358.0
+color = Color(0, 0, 0, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PPSFT Logo" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = -83.0
+offset_right = 167.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "[PPSFT]"
+label_settings = SubResource("LabelSettings_7ekb4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = -135.0
+offset_top = -136.0
+offset_right = 131.0
+offset_bottom = -58.0
+text = "Keep It Soft"
+label_settings = SubResource("LabelSettings_orijc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PackedScenes" type="Node2D" parent="."]
+script = ExtResource("2_uscg3")
+light_ability_scene = ExtResource("3_uuepi")
+tower_ability_scene = ExtResource("4_mbuqt")
+
+[node name="Overlay" type="ColorRect" parent="."]
+offset_left = -652.0
+offset_top = -360.0
+offset_right = 734.0
+offset_bottom = 356.0
+color = Color(0, 0, 0, 0)
+script = ExtResource("5_hyvk4")
+
+[node name="Timer2" type="Timer" parent="Overlay"]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fm7ea")
+volume_db = 2.0
+autoplay = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Overlay/Timer2" to="Overlay" method="_on_timer_2_timeout"]

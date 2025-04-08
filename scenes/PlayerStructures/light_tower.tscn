@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnslkhdy848oj"]
+
+[ext_resource type="Script" path="res://scripts/towers/player_tower.gd" id="1_bmvy6"]
+[ext_resource type="Texture2D" uid="uid://x5u6vfgsxayf" path="res://assets/art/sprites/light_tower_1png.png" id="2_2kudp"]
+[ext_resource type="Texture2D" uid="uid://phocubs2ode3" path="res://assets/art/sprites/crevice.png" id="2_ep4ag"]
+[ext_resource type="PackedScene" uid="uid://dp3r1uggnor8q" path="res://scenes/tower_animation.tscn" id="2_gentx"]
+[ext_resource type="PackedScene" uid="uid://bfymede5ig052" path="res://scenes/tower_weapon.tscn" id="4_l1uef"]
+[ext_resource type="PackedScene" uid="uid://ba1liivexdd1" path="res://scenes/PlayerStructures/light_beam.tscn" id="5_yhlb6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vg7sg"]
+size = Vector2(35, 15)
+
+[node name="LightTower" type="StaticBody2D" node_paths=PackedStringArray("activeNode", "collider") groups=["Building"]]
+collision_layer = 12
+collision_mask = 4
+script = ExtResource("1_bmvy6")
+activeNode = NodePath("ActiveNode")
+collider = NodePath("CollisionShape2D")
+max_target_distance = 896
+wood_cost = 0
+rock_cost = 0
+
+[node name="Crevice" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2.08165e-12, -23)
+texture = ExtResource("2_ep4ag")
+
+[node name="TowerPlayer" parent="." instance=ExtResource("2_gentx")]
+
+[node name="ActiveNode" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = -61.0
+offset_right = 32.0
+offset_bottom = 3.0
+grow_horizontal = 2
+pivot_offset = Vector2(32, 64)
+
+[node name="TowerSprite" type="Sprite2D" parent="Control"]
+clip_children = 2
+position = Vector2(32, 128)
+scale = Vector2(0.9, 1)
+texture = ExtResource("2_2kudp")
+offset = Vector2(2.08165e-12, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Building"]]
+visible = false
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_vg7sg")
+
+[node name="TowerWeapon" parent="." instance=ExtResource("4_l1uef")]
+projectile = ExtResource("5_yhlb6")
+reload_time = 3.0

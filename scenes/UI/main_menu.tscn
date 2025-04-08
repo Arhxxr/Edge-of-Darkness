@@ -1,0 +1,356 @@
+[gd_scene load_steps=25 format=3 uid="uid://7y4t6ok1cx6w"]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_uckd2"]
+[ext_resource type="PackedScene" uid="uid://chm0gg344c2fu" path="res://scenes/fog.tscn" id="2_jvo3x"]
+[ext_resource type="Script" path="res://scripts/packed_scene_list.gd" id="2_xedpd"]
+[ext_resource type="PackedScene" uid="uid://cqamxveiuaici" path="res://scenes/PlayerStructures/player_light.tscn" id="3_f4xem"]
+[ext_resource type="Script" path="res://scripts/main_menu_fog.gd" id="3_rivhv"]
+[ext_resource type="Script" path="res://scripts/audio_scripts/audio_buses.gd" id="3_yboy1"]
+[ext_resource type="PackedScene" uid="uid://b1bl4ijxxjtb7" path="res://scenes/PlayerStructures/player_tower.tscn" id="4_7xfg6"]
+[ext_resource type="Texture2D" uid="uid://c75py4c4nbb7y" path="res://assets/art/sprites/Light_Tower-Sheet.png" id="4_yqds0"]
+[ext_resource type="Texture2D" uid="uid://b8opk3nm32vej" path="res://assets/art/sprites/gem.png" id="5_synlv"]
+[ext_resource type="Texture2D" uid="uid://ywypn4dyp2r2" path="res://assets/art/sprites/large rock 1.png" id="5_yvytf"]
+[ext_resource type="Texture2D" uid="uid://ckdbdbfglqpjo" path="res://assets/art/sprites/tree 1.png" id="6_2vkp2"]
+[ext_resource type="Texture2D" uid="uid://bemc2bvulluik" path="res://assets/art/Tower.png" id="6_m81gr"]
+[ext_resource type="PackedScene" uid="uid://crapd77ys2glj" path="res://scenes/Audio/audio_manager.tscn" id="12_jbwd2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5acj3"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v00h"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2os8l"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3uuj"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4eaq"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqp5j"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrj6j"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_574ew"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqw8u"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ds1fk"]
+atlas = ExtResource("4_yqds0")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fv2k2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5acj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v00h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2os8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3uuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4eaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqp5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrj6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_574ew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqw8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ds1fk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uckd2")
+
+[node name="FogMachine" parent="." instance=ExtResource("2_jvo3x")]
+texture = null
+
+[node name="Main_Menu" type="CanvasLayer" parent="."]
+
+[node name="GameName" type="Label" parent="Main_Menu"]
+offset_left = 464.0
+offset_top = 20.0
+offset_right = 697.0
+offset_bottom = 46.0
+text = "Welcome to Edge of Darkness!"
+
+[node name="PlayGame" type="Button" parent="Main_Menu"]
+offset_left = 536.0
+offset_top = 328.0
+offset_right = 626.0
+offset_bottom = 359.0
+text = "Play Game"
+
+[node name="Options" type="Button" parent="Main_Menu"]
+offset_left = 536.0
+offset_top = 368.0
+offset_right = 626.0
+offset_bottom = 399.0
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="Main_Menu"]
+offset_left = 536.0
+offset_top = 408.0
+offset_right = 628.0
+offset_bottom = 439.0
+text = "Quit Game"
+
+[node name="TutorialLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TutorialLayer"]
+position = Vector2(128, 320)
+sprite_frames = SubResource("SpriteFrames_fv2k2")
+autoplay = "default"
+frame = 1
+frame_progress = 0.572095
+
+[node name="Label1" type="Label" parent="TutorialLayer/AnimatedSprite2D"]
+offset_left = -48.0
+offset_top = -128.0
+offset_right = 44.0
+offset_bottom = -24.0
+text = "Place Lights
+to
+reveal
+darkness"
+horizontal_alignment = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="TutorialLayer"]
+position = Vector2(736, 320)
+texture = ExtResource("6_m81gr")
+
+[node name="Label3" type="Label" parent="TutorialLayer/Sprite2D2"]
+offset_left = -48.0
+offset_top = -128.0
+offset_right = 53.0
+offset_bottom = -102.0
+text = "Place Towers
+by spending
+resources"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="TutorialLayer"]
+position = Vector2(944, 344)
+texture = ExtResource("5_synlv")
+
+[node name="Label3" type="Label" parent="TutorialLayer/Sprite2D3"]
+offset_left = -48.0
+offset_top = -152.0
+offset_right = 58.0
+offset_bottom = -22.0
+text = "Find crystals
+in darkness &
+place light to 
+collect them"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="TutorialLayer"]
+offset_left = 408.0
+offset_top = 192.0
+offset_right = 510.0
+offset_bottom = 270.0
+text = "Collect Wood
+&
+Stone"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="TutorialLayer/Label2"]
+position = Vector2(80, 128)
+texture = ExtResource("6_2vkp2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="TutorialLayer/Label2"]
+position = Vector2(16, 128)
+texture = ExtResource("5_yvytf")
+
+[node name="TutorialButton" type="Button" parent="TutorialLayer"]
+offset_left = 540.0
+offset_top = 443.0
+offset_right = 625.0
+offset_bottom = 474.0
+text = "Play now?"
+
+[node name="Title" type="Label" parent="TutorialLayer"]
+offset_left = 536.0
+offset_right = 648.0
+offset_bottom = 26.0
+text = "How do I play?"
+horizontal_alignment = 1
+
+[node name="ControlHelp" type="Label" parent="TutorialLayer"]
+offset_left = 384.0
+offset_top = 480.0
+offset_right = 775.0
+offset_bottom = 610.0
+text = "CONTROLS:
+
+press 1 for tower placement
+press 2 for light placement
+press 3 for thorhand (Used for collecting resources)"
+horizontal_alignment = 1
+
+[node name="DifficultyStates" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Difficulty" type="Label" parent="DifficultyStates"]
+offset_left = 489.0
+offset_top = 20.0
+offset_right = 665.0
+offset_bottom = 46.0
+text = "Select your difficulty:"
+horizontal_alignment = 1
+
+[node name="Easy" type="Button" parent="DifficultyStates"]
+offset_left = 390.0
+offset_top = 328.0
+offset_right = 480.0
+offset_bottom = 359.0
+tooltip_text = "Scaling value for enemies start at X"
+text = "Apprentice"
+
+[node name="Medium" type="Button" parent="DifficultyStates"]
+offset_left = 536.0
+offset_top = 328.0
+offset_right = 626.0
+offset_bottom = 359.0
+tooltip_text = "Scaling value for enemies start at X"
+text = "Novice"
+
+[node name="Hard" type="Button" parent="DifficultyStates"]
+offset_left = 671.0
+offset_top = 328.0
+offset_right = 761.0
+offset_bottom = 359.0
+tooltip_text = "Scaling value for enemies start at X"
+text = "Archmage"
+
+[node name="BackButton" type="Button" parent="DifficultyStates"]
+offset_right = 78.0
+offset_bottom = 31.0
+text = "Go Back?"
+
+[node name="OptionsCanvas" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("3_yboy1")
+
+[node name="GameOptions" type="Label" parent="OptionsCanvas"]
+offset_left = 489.0
+offset_top = 20.0
+offset_right = 665.0
+offset_bottom = 46.0
+text = "Game Options"
+horizontal_alignment = 1
+
+[node name="Contents" type="VBoxContainer" parent="OptionsCanvas"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 120.0
+offset_right = 71.0
+offset_bottom = 301.0
+grow_horizontal = 2
+
+[node name="master_label" type="Label" parent="OptionsCanvas/Contents"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="master_bus" type="HSlider" parent="OptionsCanvas/Contents"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="music_label" type="Label" parent="OptionsCanvas/Contents"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="music_bus" type="HSlider" parent="OptionsCanvas/Contents"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="sfx_label" type="Label" parent="OptionsCanvas/Contents"]
+layout_mode = 2
+text = "Effects Volume"
+
+[node name="sfx_bus" type="HSlider" parent="OptionsCanvas/Contents"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="FullScreen" type="CheckButton" parent="OptionsCanvas/Contents"]
+layout_mode = 2
+text = "Fullscreen?"
+
+[node name="BackButtonOptions" type="Button" parent="OptionsCanvas"]
+offset_right = 78.0
+offset_bottom = 31.0
+text = "Go Back?"
+
+[node name="PackedScenes" type="Node2D" parent="."]
+script = ExtResource("2_xedpd")
+light_ability_scene = ExtResource("3_f4xem")
+tower_ability_scene = ExtResource("4_7xfg6")
+
+[node name="UpdateFog" type="Node2D" parent="."]
+script = ExtResource("3_rivhv")
+
+[node name="AudioManager" parent="." instance=ExtResource("12_jbwd2")]
+
+[connection signal="pressed" from="Main_Menu/PlayGame" to="." method="_on_play_game_pressed"]
+[connection signal="pressed" from="Main_Menu/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Main_Menu/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="TutorialLayer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="DifficultyStates/Easy" to="." method="_on_easy_pressed"]
+[connection signal="pressed" from="DifficultyStates/Medium" to="." method="_on_medium_pressed"]
+[connection signal="pressed" from="DifficultyStates/Hard" to="." method="_on_hard_pressed"]
+[connection signal="pressed" from="DifficultyStates/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="value_changed" from="OptionsCanvas/Contents/master_bus" to="OptionsCanvas" method="_on_master_bus_value_changed"]
+[connection signal="value_changed" from="OptionsCanvas/Contents/music_bus" to="OptionsCanvas" method="_on_music_bus_value_changed"]
+[connection signal="value_changed" from="OptionsCanvas/Contents/sfx_bus" to="OptionsCanvas" method="_on_sfx_bus_value_changed"]
+[connection signal="toggled" from="OptionsCanvas/Contents/FullScreen" to="." method="_on_full_screen_toggled"]
+[connection signal="pressed" from="OptionsCanvas/BackButtonOptions" to="." method="_on_back_button_options_pressed"]

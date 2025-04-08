@@ -1,0 +1,104 @@
+[gd_scene load_steps=17 format=3 uid="uid://cqamxveiuaici"]
+
+[ext_resource type="Script" path="res://scripts/lights/player_light.gd" id="1_xlu5t"]
+[ext_resource type="Texture2D" uid="uid://c75py4c4nbb7y" path="res://assets/art/sprites/Light_Tower-Sheet.png" id="2_7vvwt"]
+[ext_resource type="PackedScene" uid="uid://5srtgh5norqf" path="res://scenes/PlayerStructures/light_emmiter.tscn" id="3_gix7t"]
+[ext_resource type="AudioStream" uid="uid://clyel86u8aluy" path="res://assets/music/Sounds/Footstep_Sound.wav" id="4_5ncrb"]
+[ext_resource type="Script" path="res://scripts/audio_scripts/placement_audio.gd" id="5_l3dhn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fu0q7"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvnxe"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebhjp"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_divmn"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrxnc"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x11j4"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_na3as"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aotua"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sextl"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqge2"]
+atlas = ExtResource("2_7vvwt")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86maw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fu0q7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvnxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebhjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_divmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrxnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x11j4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_na3as")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aotua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sextl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqge2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="StreetLight" type="Node2D" node_paths=PackedStringArray("activeNode") groups=["Building"]]
+script = ExtResource("1_xlu5t")
+activeNode = NodePath("PointLight2D")
+
+[node name="StreetLightSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_86maw")
+autoplay = "default"
+frame_progress = 0.537931
+
+[node name="PointLight2D" parent="." instance=ExtResource("3_gix7t")]
+
+[node name="PlacementAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5ncrb")
+bus = &"sfx"
+script = ExtResource("5_l3dhn")
+
+[connection signal="light_placed" from="." to="PlacementAudio" method="_on_street_light_light_placed"]

@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp3r1uggnor8q"]
+
+[sub_resource type="Animation" id="Animation_qcx1p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/TowerSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 128)]
+}
+
+[sub_resource type="Animation" id="Animation_tj5u0"]
+resource_name = "tower_build"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/TowerSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(32, 131), Vector2(32, 69)]
+}
+
+[sub_resource type="Animation" id="Animation_dtyfb"]
+resource_name = "tower_destroy"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/TowerSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(32, 69), Vector2(32, 92.2732), Vector2(32, 98.0916), Vector2(32, 99.5461), Vector2(32, 99.9098), Vector2(32, 100), Vector2(32, 100.09), Vector2(32, 100.453), Vector2(32, 101.907), Vector2(32, 107.719), Vector2(32, 131)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fkvwb"]
+_data = {
+"RESET": SubResource("Animation_qcx1p"),
+"tower_build": SubResource("Animation_tj5u0"),
+"tower_destroy": SubResource("Animation_dtyfb")
+}
+
+[node name="TowerPlayer" type="AnimationPlayer"]
+autoplay = "tower_build"
+libraries = {
+"": SubResource("AnimationLibrary_fkvwb")
+}

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://chm0gg344c2fu"]
+
+[ext_resource type="Material" uid="uid://bmo5fre5pwcxl" path="res://scripts/fog_material.tres" id="1_vvjdl"]
+[ext_resource type="Script" path="res://scripts/fog_machine.gd" id="2_35v8p"]
+
+[sub_resource type="Gradient" id="Gradient_sidmj"]
+offsets = PackedFloat32Array(0, 0.996)
+colors = PackedColorArray(0.103744, 0.103744, 0.103744, 1, 0.149623, 0.0944485, 0.136038, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_751tb"]
+gradient = SubResource("Gradient_sidmj")
+width = 500
+height = 500
+
+[node name="FogMachine" type="Sprite2D" groups=["fog"]]
+z_index = 99
+texture_filter = 2
+material = ExtResource("1_vvjdl")
+texture = SubResource("GradientTexture2D_751tb")
+centered = false
+script = ExtResource("2_35v8p")

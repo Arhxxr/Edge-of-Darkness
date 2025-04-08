@@ -1,0 +1,149 @@
+[gd_scene load_steps=19 format=3 uid="uid://cex8fybn7hio5"]
+
+[ext_resource type="Script" path="res://scripts/towers/capital_building.gd" id="1_6xxt4"]
+[ext_resource type="PackedScene" uid="uid://pyr4y8dtbv4q" path="res://scenes/gem_glow.tscn" id="3_7ut58"]
+[ext_resource type="Texture2D" uid="uid://b0tp4gneqsr4a" path="res://assets/art/sprites/tower_gems/1.png" id="3_8hvhn"]
+[ext_resource type="Texture2D" uid="uid://ci58l148u8bcp" path="res://assets/art/sprites/base.png" id="3_adnsj"]
+[ext_resource type="Script" path="res://scripts/base_gem_visible.gd" id="3_yrt80"]
+[ext_resource type="Texture2D" uid="uid://s7ggvpko117a" path="res://assets/art/sprites/tower_gems/2.png" id="4_ayfgu"]
+[ext_resource type="Texture2D" uid="uid://d27hxsq3j4yjo" path="res://assets/art/sprites/tower_gems/3.png" id="5_jmdh3"]
+[ext_resource type="Texture2D" uid="uid://wd4iioon7v2l" path="res://assets/art/sprites/tower_gems/4.png" id="6_410d6"]
+[ext_resource type="Texture2D" uid="uid://dfludypvq64cn" path="res://assets/art/sprites/tower_gems/5.png" id="7_vwxat"]
+[ext_resource type="Texture2D" uid="uid://hb4eg5tsy0js" path="res://assets/art/sprites/tower_gems/6.png" id="8_ssdwv"]
+[ext_resource type="Texture2D" uid="uid://cwshkl0ssf3d3" path="res://assets/art/sprites/tower_gems/7.png" id="9_0xyhg"]
+[ext_resource type="Texture2D" uid="uid://0de1gi3ujh66" path="res://assets/art/sprites/tower_gems/8.png" id="10_yraxs"]
+[ext_resource type="Texture2D" uid="uid://bvpc3gcvnc66m" path="res://assets/art/sprites/light2.png" id="12_7s3u0"]
+[ext_resource type="Script" path="res://scripts/gem_count.gd" id="12_muno6"]
+
+[sub_resource type="Animation" id="Animation_fjk3o"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tower/Gems:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tower/Gems/GemCount:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gc002"]
+resource_name = "gems"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tower/Gems:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, -10), Vector2(2.08165e-12, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tower/Gems/GemCount:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2bu0u"]
+_data = {
+"RESET": SubResource("Animation_fjk3o"),
+"gems": SubResource("Animation_gc002")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dksl8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8hvhn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ayfgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jmdh3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_410d6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vwxat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ssdwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0xyhg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_yraxs")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Base" type="Node2D"]
+script = ExtResource("1_6xxt4")
+
+[node name="GemPlayer" type="AnimationPlayer" parent="."]
+autoplay = "gems"
+libraries = {
+"": SubResource("AnimationLibrary_2bu0u")
+}
+
+[node name="Tower" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2.08165e-12, -68)
+texture = ExtResource("3_adnsj")
+
+[node name="Gems" type="Node2D" parent="Tower"]
+visible = false
+script = ExtResource("3_yrt80")
+
+[node name="GemGlow" parent="Tower/Gems" instance=ExtResource("3_7ut58")]
+position = Vector2(-2.60209e-18, -42)
+frame_progress = 0.701199
+
+[node name="GemCount" type="AnimatedSprite2D" parent="Tower/Gems"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(2.08165e-12, 2.08165e-12)
+sprite_frames = SubResource("SpriteFrames_dksl8")
+script = ExtResource("12_muno6")
+
+[node name="Light" type="Sprite2D" parent="Tower/Gems/GemCount"]
+modulate = Color(0.439216, 0.698039, 0.913725, 0.247059)
+z_index = -1
+position = Vector2(-6.24494e-12, -48)
+scale = Vector2(0.240234, 0.240234)
+texture = ExtResource("12_7s3u0")

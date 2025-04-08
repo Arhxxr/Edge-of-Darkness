@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://biqctx38n83s7"]
+
+[ext_resource type="Script" path="res://scripts/ui/game_over.gd" id="1_v6twx"]
+
+[node name="game_over" type="Node2D"]
+script = ExtResource("1_v6twx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LoseLabel" type="Label" parent="CanvasLayer"]
+offset_left = 480.0
+offset_right = 586.0
+offset_bottom = 78.0
+theme_override_font_sizes/font_size = 36
+text = "You've Lost....
+
+:("
+horizontal_alignment = 1
+
+[node name="HintLabel" type="Label" parent="CanvasLayer"]
+offset_left = 856.0
+offset_top = 568.0
+offset_right = 1150.0
+offset_bottom = 646.0
+text = "Hint:
+Use mouse to reveal/collect resources
+to find crystals throughout the map"
+horizontal_alignment = 1
+
+[node name="TryAgain" type="Button" parent="CanvasLayer"]
+offset_left = 544.0
+offset_top = 400.0
+offset_right = 639.0
+offset_bottom = 431.0
+text = "Play Again?"
+
+[connection signal="pressed" from="CanvasLayer/TryAgain" to="." method="_on_try_again_pressed"]

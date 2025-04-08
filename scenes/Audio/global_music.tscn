@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3tp7eldhwefl"]
+
+[ext_resource type="Script" path="res://scripts/audio_scripts/global_music.gd" id="1_j7v2v"]
+[ext_resource type="AudioStream" uid="uid://b3fo7o2k83g3s" path="res://assets/music/Music/MusicBox Lightmare.wav" id="2_dean6"]
+[ext_resource type="Script" path="res://scripts/audio_scripts/songs.gd" id="3_0syi1"]
+[ext_resource type="AudioStream" uid="uid://celx8doy7q226" path="res://assets/music/Music/Shady Stalking Shadows.wav" id="4_jwma3"]
+[ext_resource type="AudioStream" uid="uid://ye31rpkskt3p" path="res://assets/music/Music/Victory_Circus.wav" id="6_xbm25"]
+[ext_resource type="AudioStream" uid="uid://dsj614bc81nsv" path="res://assets/music/Music/Piano_Space_Flow.wav" id="7_g738j"]
+[ext_resource type="AudioStream" uid="uid://dbs81ebrngyto" path="res://assets/music/Music/Wahless_Adventure.wav" id="8_6rsug"]
+[ext_resource type="AudioStream" uid="uid://cgivuxonjecpm" path="res://assets/music/Music/Rainy_Chimes.wav" id="8_iyxx1"]
+[ext_resource type="AudioStream" uid="uid://dc4hm7668aveo" path="res://assets/music/Music/Brazzin.wav" id="9_qv18h"]
+
+[node name="GlobalMusic" type="Node"]
+script = ExtResource("1_j7v2v")
+
+[node name="Song1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dean6")
+bus = &"music"
+script = ExtResource("3_0syi1")
+
+[node name="Song2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jwma3")
+bus = &"music"
+script = ExtResource("3_0syi1")
+
+[node name="Song3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_xbm25")
+bus = &"music"
+script = ExtResource("3_0syi1")
+
+[node name="Song4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_6rsug")
+bus = &"music"
+script = ExtResource("3_0syi1")
+
+[node name="Song5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_g738j")
+bus = &"music"
+script = ExtResource("3_0syi1")
+
+[node name="Song6" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_iyxx1")
+bus = &"music"
+script = ExtResource("3_0syi1")
+
+[node name="Song7" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_qv18h")
+bus = &"music"
+script = ExtResource("3_0syi1")
+
+[connection signal="finished" from="Song1" to="." method="_on_audio_stream_player_finished"]
+[connection signal="finished" from="Song2" to="." method="_on_audio_stream_player_2_finished"]
+[connection signal="finished" from="Song3" to="." method="_on_audio_stream_player_3_finished"]
+[connection signal="finished" from="Song4" to="." method="_on_audio_stream_player_4_finished"]
+[connection signal="finished" from="Song5" to="." method=" _on_audio_stream_player_5_finished"]
+[connection signal="finished" from="Song6" to="." method="_on_song_6_finished"]
+[connection signal="finished" from="Song7" to="." method="_on_song_7_finished"]

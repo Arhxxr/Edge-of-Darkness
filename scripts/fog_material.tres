@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bmo5fre5pwcxl"]
+
+[ext_resource type="Shader" path="res://scripts/fog_mask.gdshader" id="1_eup0f"]
+
+[sub_resource type="Gradient" id="Gradient_3aiye"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4r65a"]
+noise_type = 2
+frequency = 1.0
+fractal_octaves = 1
+fractal_gain = 1.535
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7psis"]
+width = 1024
+height = 1024
+generate_mipmaps = false
+seamless = true
+normalize = false
+color_ramp = SubResource("Gradient_3aiye")
+noise = SubResource("FastNoiseLite_4r65a")
+
+[resource]
+shader = ExtResource("1_eup0f")
+shader_parameter/octaves = 1
+shader_parameter/starting_amplitude = 0.211
+shader_parameter/starting_frequency = 0.1
+shader_parameter/shift = 0.0
+shader_parameter/alpha_cutoff = 0.026
+shader_parameter/velocity = Vector2(0.025, 0.025)
+shader_parameter/fog_color = Color(0.0117647, 0.00784314, 0.0862745, 1)
+shader_parameter/fog_color2 = Color(0, 0, 0, 1)
+shader_parameter/light_color = Color(0, 0, 0, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_7psis")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://crapd77ys2glj"]
+
+[ext_resource type="PackedScene" uid="uid://c3tp7eldhwefl" path="res://scenes/audio/global_music.tscn" id="1_lkct7"]
+[ext_resource type="PackedScene" uid="uid://l4443yk8nndq" path="res://scenes/audio/noises.tscn" id="2_2fubn"]
+
+[node name="AudioManager" type="Node"]
+
+[node name="GlobalMusic" parent="." instance=ExtResource("1_lkct7")]
+
+[node name="Noises" parent="." instance=ExtResource("2_2fubn")]

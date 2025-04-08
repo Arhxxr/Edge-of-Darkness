@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=3 uid="uid://dobmc44ori0gu"]
+
+[ext_resource type="Script" path="res://scripts/enemy_melee.gd" id="1_2etpt"]
+[ext_resource type="AudioStream" uid="uid://c6h1b8vicsag2" path="res://assets/music/Sounds/death_sound.wav" id="3_bekoe"]
+[ext_resource type="Texture2D" uid="uid://e0fr0v3anf4j" path="res://assets/art/sprites/enemy melee animation.png" id="3_nxuqs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tn87l"]
+radius = 19.6469
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu0qp"]
+atlas = ExtResource("3_nxuqs")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ciiqv"]
+atlas = ExtResource("3_nxuqs")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxivt"]
+atlas = ExtResource("3_nxuqs")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q2wfx"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_bu0qp")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_ciiqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu0qp")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_fxivt")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_bu0qp")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_bu0qp")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_ciiqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu0qp")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_fxivt")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_bu0qp")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 10.0
+}]
+
+[node name="EnemyCharacter" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 16
+collision_mask = 8
+motion_mode = 1
+script = ExtResource("1_2etpt")
+
+[node name="HitCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tn87l")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
+
+[node name="HitCollider" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_tn87l")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_q2wfx")
+animation = &"walking"
+autoplay = "walking"
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+max_distance = 1000.0
+bus = &"sfx"
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bekoe")
+bus = &"sfx"
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

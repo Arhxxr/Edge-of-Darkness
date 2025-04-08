@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc07bc5xc7ykt"]
+
+[ext_resource type="Script" path="res://scripts/towers/player_tower.gd" id="1_1nx0m"]
+[ext_resource type="Texture2D" uid="uid://phocubs2ode3" path="res://assets/art/sprites/crevice.png" id="2_8xl23"]
+[ext_resource type="Texture2D" uid="uid://fux405r75le" path="res://assets/art/sprites/ice_tower_1.png" id="3_1b7qu"]
+[ext_resource type="PackedScene" uid="uid://dp3r1uggnor8q" path="res://scenes/tower_animation.tscn" id="3_5bscv"]
+[ext_resource type="PackedScene" uid="uid://bfymede5ig052" path="res://scenes/tower_weapon.tscn" id="4_hc18e"]
+[ext_resource type="PackedScene" uid="uid://35lea55pap53" path="res://scenes/Projectiles/ice_tower_aoe_projectile.tscn" id="5_krn0l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vg7sg"]
+size = Vector2(35, 15)
+
+[node name="Building" type="StaticBody2D" node_paths=PackedStringArray("activeNode", "collider") groups=["Building"]]
+collision_layer = 12
+collision_mask = 4
+script = ExtResource("1_1nx0m")
+activeNode = NodePath("ActiveNode")
+collider = NodePath("CollisionShape2D")
+max_target_distance = 240
+wood_cost = 0
+rock_cost = 0
+aoe_radius = 240.0
+
+[node name="Crevice" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2.08165e-12, -23)
+texture = ExtResource("2_8xl23")
+
+[node name="TowerPlayer" parent="." instance=ExtResource("3_5bscv")]
+
+[node name="ActiveNode" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+texture_filter = 1
+clip_contents = true
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = -61.0
+offset_right = 32.0
+offset_bottom = 3.0
+grow_horizontal = 2
+pivot_offset = Vector2(32, 64)
+
+[node name="TowerSprite" type="Sprite2D" parent="Control"]
+clip_children = 2
+position = Vector2(32, 128)
+texture = ExtResource("3_1b7qu")
+offset = Vector2(2.08165e-12, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Building"]]
+visible = false
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_vg7sg")
+
+[node name="TowerWeapon" parent="." instance=ExtResource("4_hc18e")]
+z_index = -1
+position = Vector2(0, 0)
+projectile = ExtResource("5_krn0l")

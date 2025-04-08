@@ -1,0 +1,162 @@
+[gd_scene load_steps=10 format=3 uid="uid://do76j37xx3kdt"]
+
+[ext_resource type="PackedScene" uid="uid://chm0gg344c2fu" path="res://scenes/fog.tscn" id="1_lo574"]
+[ext_resource type="Script" path="res://scripts/ui/credits.gd" id="1_o0til"]
+[ext_resource type="Script" path="res://scripts/credits_fog_controller.gd" id="2_5ll01"]
+[ext_resource type="Script" path="res://scripts/packed_scene_list.gd" id="2_ebhmx"]
+[ext_resource type="PackedScene" uid="uid://cqamxveiuaici" path="res://scenes/PlayerStructures/player_light.tscn" id="3_0oq3m"]
+[ext_resource type="PackedScene" uid="uid://b1bl4ijxxjtb7" path="res://scenes/PlayerStructures/player_tower.tscn" id="4_k05um"]
+[ext_resource type="Script" path="res://scripts/fog_clear.gd" id="6_v42ir"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r7w1n"]
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_tiy2i"]
+font_size = 42
+
+[node name="Credits" type="Node2D"]
+script = ExtResource("1_o0til")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -18.0
+offset_top = -30.0
+offset_right = 1009.0
+offset_bottom = 577.0
+scale = Vector2(1.16, 1.16)
+color = Color(0, 0, 0, 1)
+
+[node name="FogMachine" parent="." instance=ExtResource("1_lo574")]
+visible = false
+texture = null
+
+[node name="PackedScenes" type="Node2D" parent="."]
+script = ExtResource("2_ebhmx")
+light_ability_scene = ExtResource("3_0oq3m")
+tower_ability_scene = ExtResource("4_k05um")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(580, 322)
+
+[node name="FogClear" type="Node2D" parent="."]
+position = Vector2(158, -7)
+script = ExtResource("6_v42ir")
+
+[node name="Credits" type="Node2D" parent="."]
+position = Vector2(583, 316)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits"]
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -312.5
+offset_right = 250.0
+offset_bottom = 326.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label4" type="Label" parent="Credits/VBoxContainer"]
+layout_mode = 2
+text = "Thank you for playing our game!"
+label_settings = SubResource("LabelSettings_r7w1n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dove" type="VBoxContainer" parent="Credits/VBoxContainer"]
+layout_mode = 2
+
+[node name="Dove" type="Label" parent="Credits/VBoxContainer/Dove"]
+layout_mode = 2
+text = "Dove"
+label_settings = SubResource("LabelSettings_tiy2i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Credits/VBoxContainer/Dove"]
+layout_mode = 2
+text = "Resource Gathering/Project Manager"
+label_settings = SubResource("LabelSettings_r7w1n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Eyepatch" type="VBoxContainer" parent="Credits/VBoxContainer"]
+layout_mode = 2
+
+[node name="Eyepatch" type="Label" parent="Credits/VBoxContainer/Eyepatch"]
+layout_mode = 2
+text = "Eyepatch"
+label_settings = SubResource("LabelSettings_tiy2i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Credits/VBoxContainer/Eyepatch"]
+layout_mode = 2
+text = "Tower/Foreground Art"
+label_settings = SubResource("LabelSettings_r7w1n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Faraday" type="VBoxContainer" parent="Credits/VBoxContainer"]
+layout_mode = 2
+
+[node name="Faraday" type="Label" parent="Credits/VBoxContainer/Faraday"]
+layout_mode = 2
+text = "Faraday"
+label_settings = SubResource("LabelSettings_tiy2i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Credits/VBoxContainer/Faraday"]
+layout_mode = 2
+text = "Programming"
+label_settings = SubResource("LabelSettings_r7w1n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MayBeTall" type="VBoxContainer" parent="Credits/VBoxContainer"]
+layout_mode = 2
+
+[node name="MayBeTall" type="Label" parent="Credits/VBoxContainer/MayBeTall"]
+layout_mode = 2
+text = "MayBeTall"
+label_settings = SubResource("LabelSettings_tiy2i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fog Shader" type="Label" parent="Credits/VBoxContainer/MayBeTall"]
+layout_mode = 2
+text = "Programming"
+label_settings = SubResource("LabelSettings_r7w1n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bangaalore" type="VBoxContainer" parent="Credits/VBoxContainer"]
+layout_mode = 2
+
+[node name="Bangaalore" type="Label" parent="Credits/VBoxContainer/Bangaalore"]
+layout_mode = 2
+text = "Bangaalore"
+label_settings = SubResource("LabelSettings_tiy2i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Credits/VBoxContainer/Bangaalore"]
+layout_mode = 2
+text = "Enemy/Resource Art
+Cheerleader"
+label_settings = SubResource("LabelSettings_r7w1n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FogController" type="Node2D" parent="."]
+position = Vector2(-595, -333)
+script = ExtResource("2_5ll01")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true

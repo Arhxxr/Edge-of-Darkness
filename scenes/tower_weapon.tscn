@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfymede5ig052"]
+
+[ext_resource type="Script" path="res://scripts/towers/tower_weapon.gd" id="1_anebk"]
+[ext_resource type="PackedScene" uid="uid://sygx75ovxur7" path="res://scenes/Projectiles/tower_projectile.tscn" id="2_g1vpp"]
+
+[node name="TowerWeapon" type="Node2D"]
+z_index = 50
+position = Vector2(0, -62)
+script = ExtResource("1_anebk")
+projectile = ExtResource("2_g1vpp")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://l4443yk8nndq"]
+
+[ext_resource type="AudioStream" uid="uid://chuex7dht74un" path="res://assets/music/Sounds/Ui_Click_3.wav" id="1_ab0dy"]
+[ext_resource type="Script" path="res://scripts/audio_scripts/button_press.gd" id="2_l5xpk"]
+
+[node name="Noises" type="Node"]
+
+[node name="BuildingSounds" type="AudioStreamPlayer2D" parent="."]
+bus = &"sfx"
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ab0dy")
+bus = &"sfx"
+script = ExtResource("2_l5xpk")

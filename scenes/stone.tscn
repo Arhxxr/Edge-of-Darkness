@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://l15ju5i772bp"]
+
+[ext_resource type="Script" path="res://scripts/stone.gd" id="1_32m2w"]
+[ext_resource type="Texture2D" uid="uid://ddsda21ssjm31" path="res://assets/art/sprites/rock 1.png" id="2_lla5y"]
+[ext_resource type="AudioStream" uid="uid://ce1ud1d1yhgom" path="res://assets/music/Sounds/Ui_Click_2.wav" id="3_i4ll0"]
+
+[sub_resource type="Animation" id="Animation_nw5id"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1u46a"]
+resource_name = "resource_gather"
+length = 0.80001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, -0.000366588, -0.00154342, -0.00527962, -0.0171413, -0.0547999, -0.174533, -0.173912, -0.170996, -0.157392, -0.0939096, 0.0938692, 0.157383, 0.170995, 0.173912, 0.174533, 0.0807041, 0.0372672, 0.0171586, 0.00784965, 0.00354015, 0.00154513, 0.000621567, 0.000194015, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, 1), Vector2(1.00608, 1), Vector2(1.01389, 1), Vector2(1.02344, 1), Vector2(1.01597, 1), Vector2(1.07899, 1), Vector2(1.1, 1), Vector2(1.1, 1), Vector2(1.09066, 1), Vector2(1.06265, 1), Vector2(1.01597, 1), Vector2(1.01728, 1), Vector2(1.02492, 1), Vector2(1.01389, 1), Vector2(1.00502, 1), Vector2(1.00247, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xe04w"]
+_data = {
+"RESET": SubResource("Animation_nw5id"),
+"resource_gather": SubResource("Animation_1u46a")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8hyo7"]
+size = Vector2(64, 64)
+
+[node name="stone" type="Node2D"]
+script = ExtResource("1_32m2w")
+
+[node name="ResourcePlayer" type="AnimationPlayer" parent="."]
+speed_scale = 3.0
+libraries = {
+"": SubResource("AnimationLibrary_xe04w")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lla5y")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8hyo7")
+
+[node name="PickUpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i4ll0")
+max_polyphony = 2
+bus = &"sfx"
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
